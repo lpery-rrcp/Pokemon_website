@@ -1,9 +1,58 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+require 'json'
+
+Pokemon.destroy_all
+Move.destroy_all
+Item.destroy_all
+
+def load_json(file)
+  file_path = Rails.root.join('db', 'pokemon_json', file)
+  JSON.parse(File.read(file_path))
+end
+
+# Seed Pokémon
+def seed_pokemon
+  pokedex_data = load_json('pokedex.json')
+  pokedex_data.each do |p|
+    Pokemon.find_or_create_by(pokedex_id: p['id']) do |pokemon|
+      pokemon.name = p['name']['english']
+      pokemon.type = p['type'].join(', ')
+      pokemon.base_hp = p['base']['HP']
+      pokemon.base_attack = p['base']['Attack']
+      pokemon.base_defense = p['base']['Defense']
+      pokemon.base_sp_attack = p['base']['Sp. Attack']
+      pokemon.base_sp_defense = p['base']['Sp. Defense']
+      pokemon.base_speed = p['base']['Speed']
+    end
+  end
+  puts "Pokemon: #{Pokemon.count}"
+end
+
+# Seed Moves
+def seed_moves
+  move_data = load_json('moves.json')
+  move_data.each do |m|
+    Move.find_or_create_by(name: m['ename']) do |move|
+      move.accuracy = m['accuracy']
+      move.power = m['power']
+      move.pp = m['pp']
+      move.category = m['category']
+      move.move_type = m['type']
+    end
+  end
+  puts "Moves: #{Move.count}"
+end
+
+# Seed Items
+def seed_items
+  item_data = load_json('items.json')
+  item_data.each do |i|
+    Item.find_or_create_by(name: i['name']['english'])
+  end
+  puts "Items: #{Item.count}"
+end
+
+puts 'Seeding database...'
+seed_pokemon
+seed_moves
+seed_items
+puts 'Seeding complete!'
