@@ -1,2 +1,15 @@
-<h1>Pokemon#show</h1>
-<p>Find me in app/views/pokemon/show.html.erb</p>
+<h1><%= @pokemon.name %></h1>
+
+<img src="<% asset_path("pokemon/#{@pokemon.pokedex_id}.png") %>" width="150" >
+
+<p>Type(s): <%= @pokemon.types%></p> <!--Might need to change to type-->
+
+<h2>Base Stats</h2>
+<ul>
+  <li>HP: <%= @pokemon.base_hp %></li>
+  <li>Attack: <%= @pokemon.base_attack %></li>
+  <li>Defense: <%= @pokemon.base_defense %></li>
+  <li>Sp. Attack: <%= @pokemon.base_sp_attack %></li>
+  <li>Sp. Defense: <%= @pokemon.base_sp_defense %></li>
+  <li>Speed: <%= @pokemon.base_speed %></li>
+</ul>

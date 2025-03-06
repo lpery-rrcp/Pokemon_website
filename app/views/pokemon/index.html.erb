@@ -1,2 +1,23 @@
-<h1>Pokemon#index</h1>
-<p>Find me in app/views/pokemon/index.html.erb</p>
+<h1>Pokemon List</h1>
+
+<%= form_tag pokemon_index_path, mthod: :get do %>
+  <input type="text" name="search" placeholder="Search Pokemon">
+  <select name="type_filter">
+    <option value="">All Types</option>
+    <% Pokemon.distinct.pluck(:types).each do |type| %>
+      <option value="<%= type %>"> <%= type %> </option>
+    <% end %>
+  </select>
+  <button type="submit">Search</button>
+<% end %>
+
+<!--Pokemon List-->
+<ul>
+  <% @pokemon.each do |p| %>
+    <li>
+      <%= image_tag "pokemon/#{p.pokedex_id}", size: "50x50" %>
+      <%= link_to p.name, pokemon_path(p) %>
+    </li>
+  <% end %>
+</ul>
+<%= will_paginate @pokemon %>
