@@ -1,2 +1,8 @@
-<h1>Items#show</h1>
-<p>Find me in app/views/items/show.html.erb</p>
+<!-- app/views/items/show.html.erb -->
+<h1><%= @item.name.capitalize %></h1>
+
+<p>
+  <strong>Name:</strong> <%= @item.name.capitalize %>
+</p>
+
+<%= link_to 'Back to Items List', items_path %>

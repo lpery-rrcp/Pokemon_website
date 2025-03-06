@@ -1,2 +1,33 @@
-<h1>Moves#show</h1>
-<p>Find me in app/views/moves/show.html.erb</p>
+<h1><%= @move.name %></h1>
+
+<div>
+  <strong>Type:</strong> <%= @move.move_type %>
+</div>
+<div>
+  <strong>Power:</strong> <%= @move.power %>
+</div>
+<div>
+  <strong>PP:</strong> <%= @move.pp %>
+</div>
+<div>
+  <strong>Accuracy:</strong> <%= @move.accuracy %>
+</div>
+<div>
+  <strong>Category:</strong> <%= @move.category %>
+</div>
+
+<h2>Associated Pokémon (add later)</h2>
+<ul>
+  <% @move.pokemons.each do |pokemon| %>
+    <li><%= link_to pokemon.name, pokemon_path(pokemon) %></li>
+  <% end %>
+</ul>
+
+<h2>Associated Types</h2>
+<ul>
+  <% @move.types.each do |type| %>
+    <li><%= type.name %></li>
+  <% end %>
+</ul>
+
+<%= link_to 'Back to Moves', moves_path, class: "btn btn-secondary" %>

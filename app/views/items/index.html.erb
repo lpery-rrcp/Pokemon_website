@@ -1,2 +1,10 @@
-<h1>Items#index</h1>
-<p>Find me in app/views/items/index.html.erb</p>
+<!-- app/views/items/index.html.erb -->
+<h1>Items</h1>
+
+<% @items.each do |item| %>
+  <div class="item">
+    <h2><%= link_to item.name.capitalize, item_path(item) %></h2>
+  </div>
+<% end %>
+
+<%# <%= will_paginate @items %>

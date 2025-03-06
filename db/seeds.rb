@@ -3,6 +3,7 @@ require 'json'
 Pokemon.destroy_all
 Move.destroy_all
 Item.destroy_all
+Type.destroy_all
 
 def load_json(file)
   file_path = Rails.root.join('db', 'pokemon_json', file)
@@ -46,13 +47,27 @@ end
 def seed_items
   item_data = load_json('items.json')
   item_data.each do |i|
-    Item.find_or_create_by(name: i['name']['english'])
+    item_name = i['name']['english'].strip.downcase
+    Item.find_or_create_by(name: item_name) do |item|
+      item_name = i ['name']['english']
+    end
   end
   puts "Items: #{Item.count}"
+end
+
+def seed_types
+  type_data = load_json('types.json')
+  type_data.each do |t|
+    Type.find_or_create_by(name: t['english'].strip.downcase) do |type|
+      type.name = t['english']
+    end
+  end
+  puts "Types: #{Type.count}"
 end
 
 puts 'Seeding database...'
 seed_pokemon
 seed_moves
 seed_items
+seed_types
 puts 'Seeding complete!'

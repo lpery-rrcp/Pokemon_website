@@ -1,16 +1,11 @@
 Rails.application.routes.draw do
-  get "type/name:"
-  root 'pokemon#index'
+  root 'about#index'
 
   resources :pokemon, only: [:index, :show]
   resources :moves, only: [:index, :show]
-  resources :items, only: [:index]
-  # get "items/index"
-  # get "items/show"
-  # get "moves/index"
-  # get "moves/show"
-  # get "pokemon/index"
-  # get "pokemon/show"
+  resources :items, only: [:index, :show]
+  resources :about, only: [:index]
+  resources :types
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
