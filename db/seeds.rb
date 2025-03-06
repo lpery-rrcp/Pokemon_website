@@ -15,7 +15,7 @@ def seed_pokemon
   pokedex_data.each do |p|
     Pokemon.find_or_create_by(pokedex_id: p['id']) do |pokemon|
       pokemon.name = p['name']['english']
-      pokemon.type = p['type'].join(', ')
+      pokemon.type = Array(p['type']).join(', ')
       pokemon.base_hp = p['base']['HP']
       pokemon.base_attack = p['base']['Attack']
       pokemon.base_defense = p['base']['Defense']

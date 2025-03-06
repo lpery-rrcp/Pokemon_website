@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "type/name:"
   root 'pokemon#index'
 
   resources :pokemon, only: [:index, :show]

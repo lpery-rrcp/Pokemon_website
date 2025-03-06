@@ -1,21 +1,23 @@
 <h1>Pokemon List</h1>
 
-<%= form_tag pokemon_index_path, mthod: :get do %>
-  <input type="text" name="search" placeholder="Search Pokemon">
-  <select name="type_filter">
+<form method="get" action="<%= pokemon_index_path %>">
+  <input type="text" name="search" placeholder="Search Pokemon" value="<%= params[:search] %>">
+
+  <select name="type">
     <option value="">All Types</option>
-    <% Pokemon.distinct.pluck(:types).each do |type| %>
-      <option value="<%= type %>"> <%= type %> </option>
+    <% @types.each do |type| %>
+      <option value="<%= type %>" <%= "selected" if params[:type] == type %>><%= type.capitalize %></option>
     <% end %>
   </select>
-  <button type="submit">Search</button>
-<% end %>
+
+  <input type="submit" value="Search">
+</form>
 
 <!--Pokemon List-->
 <ul>
   <% @pokemon.each do |p| %>
     <li>
-      <%= image_tag "pokemon/#{p.pokedex_id}", size: "50x50" %>
+      <%= image_tag "sprites/#{p.pokedex_id.to_s.rjust(3, '0')}MS.png", size: "50x50" %>
       <%= link_to p.name, pokemon_path(p) %>
     </li>
   <% end %>

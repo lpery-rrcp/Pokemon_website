@@ -9,7 +9,7 @@ class CreatePokemons < ActiveRecord::Migration[8.0]
       t.integer :base_sp_attack
       t.integer :base_sp_defense
       t.integer :base_speed
-      t.text :type
+      t.string :type
 
       t.timestamps
     end

@@ -1,8 +1,9 @@
 <h1><%= @pokemon.name %></h1>
 
-<img src="<% asset_path("pokemon/#{@pokemon.pokedex_id}.png") %>" width="150" >
+<%= image_tag "pokemon/#{@pokemon.pokedex_id.to_s.rjust(3, '0')}.png", size: "150" %>
 
-<p>Type(s): <%= @pokemon.types%></p> <!--Might need to change to type-->
+
+<p>Type(s): <%= @pokemon.type%></p> <!--Might need to change to type-->
 
 <h2>Base Stats</h2>
 <ul>
