@@ -1,10 +1,15 @@
-<!-- app/views/items/index.html.erb -->
-<h1>Items</h1>
+<h1 class="title">Items List</h1>
 
-<% @items.each do |item| %>
-  <div class="item">
-    <h2><%= link_to item.name.capitalize, item_path(item) %></h2>
-  </div>
-<% end %>
+<div class="columns is-multiline"></div>
+  <% @items.each do |item| %>
+    <div class="column is-one-third">
+      <div class="box">
+        <h2 class="subbtitle"><%= link_to item.name.capitalize, item_path(item) %></h2>
+      </div>
+    </div>
+  <% end %>
+</div>
 
-<%# <%= will_paginate @items %>
+<nav class="pagination is-centered" role="navigation">
+  <%= will_paginate @items, class: "pagination-list" %>
+</nav>
