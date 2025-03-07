@@ -15,7 +15,7 @@ class PokemonController < ApplicationController
       @pokemon = @pokemon.where("LOWER(type) LIKE ?", "%#{params[:type].downcase}%")
     end
 
-    @pokemon = @pokemon.paginate(page: params[:page], per_page: 10)
+    @pokemon = @pokemon.paginate(page: params[:page], per_page: 12)
   end
 
 

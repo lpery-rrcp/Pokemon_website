@@ -1,1 +1,9 @@
 @import "bulma";
+
+.pagination .pagination-list li {
+  margin-right: 10px; /* Adjust this value to your desired spacing */
+}
+
+.pokemon .pagination .pagination-list li {
+  margin-right: 10px;
+}
