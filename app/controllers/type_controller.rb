@@ -1,5 +1,5 @@
 class TypesController < ApplicationController
-  def name
+  def index
     @types = Type.all
   end
 end
