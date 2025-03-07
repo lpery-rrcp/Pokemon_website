@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :moves, only: [:index, :show]
   resources :items, only: [:index, :show]
   resources :about, only: [:index]
-  resources :types, only: [:index]
+  resources :types
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
