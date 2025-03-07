@@ -1,5 +1,15 @@
 <h1 class="title">Items List</h1>
 
+<!-- Search Form -->
+<%= form_with(url: items_path, method: :get, local: true, class: "form-inline") do |form| %>
+  <%= form.label :search, "Search by name" %>
+  <%= form.text_field :search, placeholder: "Enter item name", value: params[:search], class: "input" %>
+
+  <%= form.submit "Search", class: "button is-primary" %>
+<% end %>
+
+
+<!--Item list-->
 <div class="columns is-multiline"></div>
   <% @items.each do |item| %>
     <div class="column is-one-third">
