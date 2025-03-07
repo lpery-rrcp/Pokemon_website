@@ -1,4 +1,4 @@
 class TypeController < ApplicationController
-  def name:
+  def name
   end
 end
