@@ -1,26 +1,52 @@
-<h1>Pokemon List</h1>
+<h1 class="title has-text-centered">Pokemon List</h1>
 
-<form method="get" action="<%= pokemon_index_path %>">
-  <input type="text" name="search" placeholder="Search Pokemon" value="<%= params[:search] %>">
+<!-- Search Form -->
+<div class="columns is-centered">
+  <div class="column is-half">
+    <form method="get" action="<%= pokemon_index_path %>" class="box">
+      <div class="field has-addons">
+        <div class="control is-expanded">
+          <input class="input" type="text" name="search" placeholder="Search Pokemon" value="<%= params[:search] %>">
+        </div>
+        <div class="control">
+          <div class="select">
+            <select name="type">
+              <option value="">All Types</option>
+              <% @types.each do |type| %>
+                <option value="<%= type %>" <%= "selected" if params[:type] == type %>><%= type.capitalize %></option>
+              <% end %>
+            </select>
+          </div>
+        </div>
+        <div class="control">
+          <input type="submit" value="Search" class="button is-primary">
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
 
-  <select name="type">
-    <option value="">All Types</option>
-    <% @types.each do |type| %>
-      <option value="<%= type %>" <%= "selected" if params[:type] == type %>><%= type.capitalize %></option>
+<!-- Pokemon Grid -->
+<div class="container">
+  <div class="columns is-multiline">
+    <% @pokemon.each do |p| %>
+      <div class="column is-one-quarter">
+        <div class="card has-text-centered">
+          <div class="card-content">
+            <figure class="image is-128x128 mx-auto">
+              <%= image_tag "sprites/#{p.pokedex_id.to_s.rjust(3, '0')}MS.png" %>
+            </figure>
+            <h5 class="title is-5">
+              <%= link_to p.name, pokemon_path(p), class: "has-text-link" %>
+            </h5>
+          </div>
+        </div>
+      </div>
     <% end %>
-  </select>
+  </div>
+</div>
 
-
-  <input type="submit" value="Search">
-</form>
-
-<!--Pokemon List-->
-<ul>
-  <% @pokemon.each do |p| %>
-    <li>
-      <%= image_tag "sprites/#{p.pokedex_id.to_s.rjust(3, '0')}MS.png", size: "50x50" %>
-      <%= link_to p.name, pokemon_path(p) %>
-    </li>
-  <% end %>
-</ul>
-<%= will_paginate @pokemon %>
+<!-- Pagination -->
+<nav class="pagination is-centered" role="navigation" aria-label="pagination">
+  <%= will_paginate @pokemon, class: "pagination-list" %>
+</nav>
