@@ -1,2 +1,11 @@
-<h1>Moves#show</h1>
-<p>Find me in app/views/moves/show.html.erb</p>
+<div class="box">
+  <h1 class="title"><%= @move.name %></h1>
+
+  <p><strong>Type:</strong> <%= @move.move_type %></p>
+  <p><strong>Power:</strong> <%= @move.power %></p>
+  <p><strong>PP:</strong> <%= @move.pp %></p>
+  <p><strong>Accuracy:</strong> <%= @move.accuracy %></p>
+  <p><strong>Category:</strong> <%= @move.category %></p>
+
+  <%= link_to 'Back to Moves', moves_path, class: "button is-secondary" %>
+</div>

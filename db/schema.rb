@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_06_032722) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_06_193727) do
   create_table "items", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -28,6 +28,22 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_06_032722) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "moves_pokemons", id: false, force: :cascade do |t|
+    t.integer "move_id", null: false
+    t.integer "pokemon_id", null: false
+    t.index ["move_id", "pokemon_id"], name: "index_moves_pokemons_on_move_id_and_pokemon_id"
+    t.index ["pokemon_id", "move_id"], name: "index_moves_pokemons_on_pokemon_id_and_move_id"
+  end
+
+  create_table "moves_types", force: :cascade do |t|
+    t.integer "move_id", null: false
+    t.integer "type_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["move_id"], name: "index_moves_types_on_move_id"
+    t.index ["type_id"], name: "index_moves_types_on_type_id"
+  end
+
   create_table "pokemons", force: :cascade do |t|
     t.string "name"
     t.integer "pokedex_id"
@@ -41,4 +57,20 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_06_032722) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "pokemons_types", id: false, force: :cascade do |t|
+    t.integer "pokemon_id", null: false
+    t.integer "type_id", null: false
+    t.index ["pokemon_id", "type_id"], name: "index_pokemons_types_on_pokemon_id_and_type_id"
+    t.index ["type_id", "pokemon_id"], name: "index_pokemons_types_on_type_id_and_pokemon_id"
+  end
+
+  create_table "types", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "moves_types", "moves"
+  add_foreign_key "moves_types", "types"
 end

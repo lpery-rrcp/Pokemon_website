@@ -1,2 +1,53 @@
-<h1>Moves#index</h1>
-<p>Find me in app/views/moves/index.html.erb</p>
+<h1 class="title">Moves</h1>
+
+<!-- Search Form -->
+<%= form_with(url: moves_path, method: :get, local: true, class: "box") do |form| %>
+  <div class="field">
+    <label class="label">Search by name</label>
+    <div class="control">
+      <%= form.text_field :search, placeholder: "Enter move name", value: params[:search], class: "input" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">Filter by type</label>
+    <div class="control">
+      <%= form.select :move_type, options_for_select(Move.distinct.pluck(:move_type)), { include_blank: true }, class: "select" %>
+    </div>
+  </div>
+
+  <div class="control">
+    <%= form.submit "Search", class: "button is-primary" %>
+  </div>
+<% end %>
+
+<!-- Moves List -->
+<table class="table is-striped is-hoverable is-fullwidth">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Power</th>
+      <th>PP</th>
+      <th>Accuracy</th>
+      <th>Category</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @moves.each do |move| %>
+      <tr>
+        <td><%= link_to move.name, move_path(move) %></td>
+        <td><%= move.move_type %></td>
+        <td><%= move.power %></td>
+        <td><%= move.pp %></td>
+        <td><%= move.accuracy %></td>
+        <td><%= move.category %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<!-- Pagination -->
+<nav class="pagination is-centered" role="navigation">
+  <%= will_paginate @moves, class: "pagination-list" %>
+</nav>

@@ -1,16 +1,31 @@
-<h1><%= @pokemon.name %></h1>
-
-<%= image_tag "pokemon/#{@pokemon.pokedex_id.to_s.rjust(3, '0')}.png", size: "150" %>
-
-
-<p>Type(s): <%= @pokemon.type%></p> <!--Might need to change to type-->
-
-<h2>Base Stats</h2>
-<ul>
-  <li>HP: <%= @pokemon.base_hp %></li>
-  <li>Attack: <%= @pokemon.base_attack %></li>
-  <li>Defense: <%= @pokemon.base_defense %></li>
-  <li>Sp. Attack: <%= @pokemon.base_sp_attack %></li>
-  <li>Sp. Defense: <%= @pokemon.base_sp_defense %></li>
-  <li>Speed: <%= @pokemon.base_speed %></li>
-</ul>
+<div class="container">
+  <div class="columns is-centered">
+    <div class="column is-half">
+      <div class="card has-text-centered">
+        <div class="card-header">
+          <h2 class="card-header-title title is-3"><%= @pokemon.name %></h2>
+        </div>
+        <div class="card-content">
+          <figure class="image is-150x150 mx-auto">
+            <%= image_tag "pokemon/#{@pokemon.pokedex_id.to_s.rjust(3, '0')}.png" %>
+          </figure>
+          <p class="mt-3"><strong>Type(s):</strong> <%= @pokemon.types.map(&:name).join(', ') %></p>
+          <h2 class="title is-5 mt-4">Base Stats</h2>
+          <ul class="content">
+            <li><strong>HP:</strong> <%= @pokemon.base_hp %></li>
+            <li><strong>Attack:</strong> <%= @pokemon.base_attack %></li>
+            <li><strong>Defense:</strong> <%= @pokemon.base_defense %></li>
+            <li><strong>Sp. Attack:</strong> <%= @pokemon.base_sp_attack %></li>
+            <li><strong>Sp. Defense:</strong> <%= @pokemon.base_sp_defense %></li>
+            <li><strong>Speed:</strong> <%= @pokemon.base_speed %></li>
+          </ul>
+        </div>
+        <div class="card-footer">
+          <div class="card-footer-item">
+            <%= link_to "Back to Pokémon List", pokemon_index_path, class: "button is-info" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

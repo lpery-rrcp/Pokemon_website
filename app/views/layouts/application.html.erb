@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -13,16 +14,42 @@
     <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
     <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
 
+    <!-- Icon Links -->
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
+    <%# <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%# <%= javascript_importmap_tags %>
+
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+
+    <style>
+      /* Extra space at the top for fixed navbar */
+      body {
+        padding-top: 50px;
+      }
+    </style>
+
   </head>
 
   <body>
-    <%= yield %>
+    <!-- Bulma Navbar -->
+    <nav class="navbar is-fixed-top has-background-info">
+      <div class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item has-text-white" href="/about">About</a>
+          <a class="navbar-item has-text-white" href="/pokemon">Pokémon</a>
+          <a class="navbar-item has-text-white" href="/moves">Moves</a>
+          <a class="navbar-item has-text-white" href="/items">Items</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="section">
+      <%= yield %>
+    </div>
   </body>
 </html>
