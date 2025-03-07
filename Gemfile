@@ -40,7 +40,7 @@ gem "thruster", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 gem 'json'
-gem 'will_paginate', '~> 3.3'
+gem 'will_paginate', '~> 4.0'
 # Gemfile
 gem 'kaminari'
 # gem 'html5'
