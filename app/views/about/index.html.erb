@@ -1,14 +1,49 @@
-<h1>About the Pokémon Project</h1>
-<p>This is a project to showcase Pokémon, their types, moves, and items.</p>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>About the Pokémon Project</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
 
-<h3>Navigation</h3>
-<ul>
-  <li><a href="/pokemon">Pokémon</a></li>
-  <li><a href="/moves">Moves</a></li>
-  <li><a href="/items">Items</a></li>
-</ul>
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 
-<p>
-  This websites helps you find Pokemon, moves, and the items.
-  It is still a work in progress.
-</p>
+    <style>
+      /* Extra space at the top for fixed navbar */
+      body {
+        padding-top: 50px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar is-fixed-top has-background-info">
+      <div class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item has-text-white" href="/about">About</a>
+          <a class="navbar-item has-text-white" href="/pokemon">Pokémon</a>
+          <a class="navbar-item has-text-white" href="/moves">Moves</a>
+          <a class="navbar-item has-text-white" href="/items">Items</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- About Page Content -->
+    <div class="section">
+      <div class="container">
+        <h1 class="title">About the Pokémon Project</h1>
+        <p class="subtitle">Welcome to a project dedicated to showcasing Pokémon, their types, moves, and items. This project is designed to help users explore and learn more about Pokémon and their capabilities!</p>
+
+        <div class="content">
+          <h3 class="title is-4">Navigation</h3>
+          <ul>
+            <li><a class="has-text-info" href="/pokemon">Pokémon</a> - Discover detailed information about your favorite Pokémon!</li>
+            <li><a class="has-text-info" href="/moves">Moves</a> - Explore the various moves that Pokémon can learn.</li>
+            <li><a class="has-text-info" href="/items">Items</a> - Learn about useful items in the Pokémon world.</li>
+          </ul>
+        </div>
+
+        <div class="content">

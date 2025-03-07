@@ -21,19 +21,33 @@
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%# <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%# <%= javascript_importmap_tags % %>
+
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+
+    <style>
+      body{
+        padding-top: 50px;
+      }
+    </style>
+
   </head>
 
   <body>
-    <nav>
-      <ul>
-        <li><a href="/about">About</a></li>
-        <li><a href="/pokemon">Pokémon</a></li>
-        <li><a href="/moves">Moves</a></li>
-        <li><a href="/items">Items</a></li>
-
-      </ul>
+    <!-- Bulma Navbar -->
+    <nav class="navbar is-fixed-top has-background-info">
+      <div class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item has-text-white" href="/about">About</a>
+          <a class="navbar-item has-text-white" href="/pokemon">Pokémon</a>
+          <a class="navbar-item has-text-white" href="/moves">Moves</a>
+          <a class="navbar-item has-text-white" href="/items">Items</a>
+        </div>
+      </div>
     </nav>
 
-    <%= yield %>
+    <div class="section">
+      <%= yield %>
+    </div>
   </body>
 </html>
