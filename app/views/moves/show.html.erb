@@ -1,34 +1,11 @@
+<div class="box">
+  <h1 class="title"><%= @move.name %></h1>
 
-<h1><%= @move.name %></h1>
+  <p><strong>Type:</strong> <%= @move.move_type %></p>
+  <p><strong>Power:</strong> <%= @move.power %></p>
+  <p><strong>PP:</strong> <%= @move.pp %></p>
+  <p><strong>Accuracy:</strong> <%= @move.accuracy %></p>
+  <p><strong>Category:</strong> <%= @move.category %></p>
 
-<div>
-  <strong>Type:</strong> <%= @move.move_type %>
+  <%= link_to 'Back to Moves', moves_path, class: "button is-secondary" %>
 </div>
-<div>
-  <strong>Power:</strong> <%= @move.power %>
-</div>
-<div>
-  <strong>PP:</strong> <%= @move.pp %>
-</div>
-<div>
-  <strong>Accuracy:</strong> <%= @move.accuracy %>
-</div>
-<div>
-  <strong>Category:</strong> <%= @move.category %>
-</div>
-
-<h2>Associated Pokémon (add later)</h2>
-<ul>
-  <% @move.pokemons.each do |pokemon| %>
-    <li><%= link_to pokemon.name, pokemon_path(pokemon) %></li>
-  <% end %>
-</ul>
-
-<h2>Associated Types</h2>
-<ul>
-  <% @move.types.each do |type| %>
-    <li><%= type.name %></li>
-  <% end %>
-</ul>
-
-<%= link_to 'Back to Moves', moves_path, class: "btn btn-secondary" %>
