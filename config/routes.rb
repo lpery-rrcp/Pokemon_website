@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
-  root 'about#index'
+  root "about#index"
 
-  resources :pokemon, only: [:index, :show]
-  resources :moves, only: [:index, :show]
-  resources :items, only: [:index, :show]
-  resources :about, only: [:index]
-  resources :types
+  resources :about, only: [ :index ]
+  resources :pokemon, only: [ :index, :show ]
+  resources :moves, only: [ :index, :show ]
+  resources :items, only: [ :index, :show ]
+  resources :types, only: [ :index, :show ]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

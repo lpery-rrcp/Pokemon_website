@@ -1,5 +1,6 @@
 class PokemonController < ApplicationController
   def index
+    Rails.logger.debug "params: #{params.inspect}"  # Log the full params
     @types = Type.all.pluck(:name)  # Getting a unique type
     @pokemon = Pokemon.all
 
