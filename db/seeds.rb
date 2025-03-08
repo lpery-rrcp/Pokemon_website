@@ -10,13 +10,21 @@ def load_json(file)
   JSON.parse(File.read(file_path))
 end
 
-# Seed Pokémon
 def seed_pokemon
   pokedex_data = load_json('pokedex.json')
+
+  # Create or find the types first to ensure there are 18 unique types
+  types = {}
   pokedex_data.each do |p|
-    Pokemon.find_or_create_by(pokedex_id: p['id']) do |pokemon|
+    p['type'].each do |type_name|
+      types[type_name] ||= Type.find_or_create_by(name: type_name) # Only create unique types
+    end
+  end
+
+  # Now seed the Pokémon with the types and base stats
+  pokedex_data.each do |p|
+    pokemon = Pokemon.find_or_create_by(pokedex_id: p['id']) do |pokemon|
       pokemon.name = p['name']['english']
-      pokemon.type = Array(p['type']).join(', ')
       pokemon.base_hp = p['base']['HP']
       pokemon.base_attack = p['base']['Attack']
       pokemon.base_defense = p['base']['Defense']
@@ -24,9 +32,18 @@ def seed_pokemon
       pokemon.base_sp_defense = p['base']['Sp. Defense']
       pokemon.base_speed = p['base']['Speed']
     end
+
+    # Assign the types to the Pokémon
+    p['type'].each do |type_name|
+      type = types[type_name]
+      pokemon.types << type unless pokemon.types.include?(type)
+    end
   end
+
   puts "Pokemon: #{Pokemon.count}"
+  puts "Types: #{Type.count}"
 end
+
 
 # Seed Moves
 def seed_moves
@@ -55,19 +72,10 @@ def seed_items
   puts "Items: #{Item.count}"
 end
 
-def seed_types
-  type_data = load_json('types.json')
-  type_data.each do |t|
-    Type.find_or_create_by(name: t['english'].strip.downcase) do |type|
-      type.name = t['english']
-    end
-  end
-  puts "Types: #{Type.count}"
-end
+
 
 puts 'Seeding database...'
 seed_pokemon
 seed_moves
 seed_items
-seed_types
 puts 'Seeding complete!'

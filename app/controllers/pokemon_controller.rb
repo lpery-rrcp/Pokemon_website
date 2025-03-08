@@ -1,7 +1,6 @@
 class PokemonController < ApplicationController
   def index
-    Rails.logger.debug "params: #{params.inspect}"  # Log the full params
-    @types = Type.all.pluck(:name) # Getting a unique type
+    @types = Type.all.pluck(:name)  # Getting a unique type
     @pokemon = Pokemon.all
 
     # Search by Pokémon name
@@ -10,14 +9,13 @@ class PokemonController < ApplicationController
       @pokemon = @pokemon.where("LOWER(name) LIKE ?", search_term)
     end
 
-    # Filter by Pokémon type (handle multiple types by searching for the type within the type string)
+    # Filter by Pokémon type (join the types table and filter by type name)
     if params[:type].present? && params[:type] != ""
-      @pokemon = @pokemon.where("LOWER(type) LIKE ?", "%#{params[:type].downcase}%")
+      @pokemon = @pokemon.joins(:types).where("LOWER(types.name) = ?", params[:type].downcase).distinct
     end
 
     @pokemon = @pokemon.paginate(page: params[:page], per_page: 12)
   end
-
 
   def show
     @pokemon = Pokemon.find(params[:id])

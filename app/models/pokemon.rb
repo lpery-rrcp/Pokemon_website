@@ -8,7 +8,6 @@ class Pokemon < ApplicationRecord
   validates :base_hp, :base_attack, :base_defense,
             :base_sp_attack, :base_sp_defense, :base_speed,
             numericality: { only_integer: true, greater_than_or_equal_to: 0 }
-  validates :type, presence: true
 
   self.inheritance_column = nil
 end
