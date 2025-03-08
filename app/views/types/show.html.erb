@@ -1,10 +1,13 @@
-<h1><%= @type.name %> Type</h1>
+<h2 class="title">Pokémon with <%= @type.name %> Type</h2>
 
-<h2>Pokémon with <%= @type.name %> Type</h2>
-<ul>
-  <% @type.pokemons.each do |pokemon| %>
-    <li>
-      <%= link_to pokemon.name, pokemon_path(pokemon) %>
-    </li>
-  <% end %>
-</ul>
+<% if @type.pokemons.any? %>
+  <ul>
+    <% @type.pokemons.each do |pokemon| %>
+      <li>
+        <%= link_to pokemon.name, pokemon_path(pokemon) %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No Pokémon with this type found.</p>
+<% end %>
