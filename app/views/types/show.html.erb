@@ -1,13 +1,19 @@
-<h2 class="title">Pokémon with <%= @type.name %> Type</h2>
+<!-- app/views/types/show.html.erb -->
+<h2 class="title"><%= @type.name %> Type</h2>
 
-<% if @type.pokemons.any? %>
+<% weaknesses = @type.weaknesses %>
+
+<% if weaknesses.any? %>
+  <strong>Weaknesses:</strong>
   <ul>
-    <% @type.pokemons.each do |pokemon| %>
-      <li>
-        <%= link_to pokemon.name, pokemon_path(pokemon) %>
-      </li>
+    <% weaknesses.each do |weakness| %>
+      <li><%= weakness %></li>
     <% end %>
   </ul>
 <% else %>
-  <p>No Pokémon with this type found.</p>
+  <p>No known weaknesses for this type.</p>
 <% end %>
+
+<div style="margin-top: 0.5in;">
+  <%= link_to "Back to Types", types_path %>
+</div>
